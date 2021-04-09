@@ -1,0 +1,63 @@
+server:
+  port: 8001
+  tomcat:
+    max-threads: 10 # tomcat 的最大并发值修改为10，默认为200
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: 123456
+    username:  root
+    url: jdbc:mysql://localhost:3306/guli?serverTimezone=GMT%2B8
+    hikari:
+      connection-test-query: SELECT 1
+      connection-timeout: 60000
+      idle-timeout: 500000
+      max-lifetime: 540000
+      maximum-pool-size: 12
+      minimum-idle: 10
+      pool-name: GuliHikariPool
+  #  设置返回json的统一时间格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+#Spring:
+  cloud:
+    sentinel:
+      transport:
+        port: 8081 # 与控制台交流的端口，随意指定一个未被使用的端口即可
+        dashboard: localhost:8080 # 指定sentinel控制台服务的端口
+    nacos:
+      discovery:
+        server-addr: localhost:8848 # nacos 服务地址
+  application:
+    name: service-edu
+
+
+mybatis-plus:
+  #configuration:
+   # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:com/zlf/service/*/mapper/*.xml
+  global-config:
+    db-config:
+      # 逻辑删除
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  type-aliases-package:
+
+
+service-oss: #  调用的提供者名称
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule # 负载均衡策略规则的名称
+
+ribbon:
+  MaxAutoRetries: 0 # 同一实例最大重试次数，不包括首次调用，默认 0
+  MaxAutoRetriesNextServer: 1 # 重试其他实例的最大重试次数，不包括首次所选的server，默认1
+  ConnectTimeout: 5000 # 连接建立的超时时长，默认1秒
+  ReadTimeout: 5000  # 处理请求的超时时间，默认1秒
+
+
+# 开启feign对Sentinel的支持 这样需要调用的服务宕机，可以采取策略
+feign:
+  sentinel:
+    enabled: true
