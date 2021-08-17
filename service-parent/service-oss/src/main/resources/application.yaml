@@ -21,9 +21,9 @@ aliyun:
   oss:
     file:
       endpoint: oss-cn-beijing.aliyuncs.com # 地域节点
-      keyid: LTAI5tFNjjg1s5mtpDC6Rxc4 # AccessKeyId
-      keysecret: fZvVNtbU8pNfmAPas53jYXhMUVHOo8 # 密钥
-      bucketname: edu-xiuyuan # bucket名字
+      keyid: LTAI5tFNjjg1s5mtpxxx6Rxc4 # AccessKeyId
+      keysecret: fZvVNtbU8pNfxxxas53jYXhMUVHOo8 # 密钥
+      bucketname: edu-xiuxxx # bucket名字
 
 
 
